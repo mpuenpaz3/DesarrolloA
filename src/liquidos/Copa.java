@@ -9,6 +9,11 @@ public class Copa extends Liquido implements Graduable{
 
     public Copa(Graduable alcohol,Liquido mezcla){
         super(mezcla.getLitros(),mezcla.getColor());
+        Liquido nuevo = (Liquido)alcohol;
+        Double litrosTotales=nuevo.getLitros()+mezcla.getLitros();
+        String color = nuevo.getColor()+mezcla.getColor();
+        super.color=color;
+        super.litros=litrosTotales;
 
     }
 
@@ -20,13 +25,6 @@ public class Copa extends Liquido implements Graduable{
     @Override
     public Double getGrados() {
         Liquido nuevo = (Liquido)alcohol;
-        if(nuevo instanceof Ron){
-            Ron nuevo2 = (Ron)alcohol;
-            return nuevo2.getGrados()*nuevo2.getLitros()/nuevo2.getLitros()+mezcla.getLitros();
-        }else if(nuevo instanceof Vodka){
-            Vodka nuevo3 = (Vodka)alcohol;
-            return nuevo3.getGrados()*nuevo3.getLitros()/nuevo3.getLitros()+mezcla.getLitros();
-        }
-        return 0.0;
+        return this.alcohol.getGrados()*nuevo.getLitros()/nuevo.getLitros()+mezcla.getLitros();           
     }
 }
